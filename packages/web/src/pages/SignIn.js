@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
-    const [passaword, setPassaword] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleEmailChange = (event) => setEmail(event.target.value);
-    const handlePassawordChange = (event) => setPassaword(event.target.value);
+    const handlePasswordChange = (event) => setPassword(event.target.value);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -16,10 +16,11 @@ export default function SignIn() {
             },
             body: JSON.stringify({
                 email,
-                passaword,
+                password,
             }),
-        }).then((response) => response.json())
-          .then(() => console.log('Success!'));
+        })
+        // .then((response) => response.json())
+        .then((data) => console.log('Success!', data));
     };
 
     return (
@@ -31,7 +32,7 @@ export default function SignIn() {
                     value={email} 
                     onChange={handleEmailChange}
                     type="email" 
-                    inputmode="email" 
+                    inputMode="email" 
                     autoComplete="username"/>
             </fieldset>
             <fieldset>
@@ -39,7 +40,7 @@ export default function SignIn() {
                 <input 
                     id="password" 
                     value={password}
-                    onChange={handlePassawordChange} 
+                    onChange={handlePasswordChange} 
                     type="password" 
                     autoComplete="current-password"/>
             </fieldset>

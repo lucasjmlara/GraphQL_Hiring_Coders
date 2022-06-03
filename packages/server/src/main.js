@@ -2,8 +2,12 @@
 // import { parse } from 'querystring';
 
 import express from 'express';
+import cors from 'cors';
 
 const server = express();
+
+// server.use(cors());
+const enableCors = cors({origin: 'http://localhost:3000'});
 
 server.get('/status', (req, res) => {
     res.send({
@@ -11,9 +15,13 @@ server.get('/status', (req, res) => {
     });
 })
 
-server.post('/authenticate', express.json(), (req, res) => {
+server
+.options('/authenticate', enableCors)
+.post('/authenticate', enableCors, express.json(), (req, res) => {
     console.log('E-mail', req.body.email, 'Senha', req.body.password);
-    res.send();
+    res.send({
+        status: "OK",
+    });
 })
 
 // const server = createServer((req, res) => {
